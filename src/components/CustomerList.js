@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export default class CustomerList extends Component {
   constructor(props) {
@@ -27,7 +29,16 @@ export default class CustomerList extends Component {
       { Header: "Postcode", accessor: "postcode" },
       { Header: "City", accessor: "city" },
       { Header: "Email", accessor: "email" },
-      { Header: "Phone", accessor: "phone" }
+      { Header: "Phone", accessor: "phone" },
+      {
+        Header: "Training record",
+        accessor: "links[2].href",
+        Cell: value => (
+          <Button>
+            <a href="#">View Training</a>
+          </Button>
+        )
+      }
     ];
     return (
       <div>
