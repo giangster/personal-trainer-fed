@@ -7,7 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 export default class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { customers: [] };
+    this.state = { id: 1, customers: [], training: [] };
   }
 
   componentDidMount = () => {
@@ -29,19 +29,11 @@ export default class CustomerList extends Component {
       { Header: "Postcode", accessor: "postcode" },
       { Header: "City", accessor: "city" },
       { Header: "Email", accessor: "email" },
-      { Header: "Phone", accessor: "phone" },
-      {
-        Header: "Training record",
-        accessor: "links[2].href",
-        Cell: value => (
-          <Button>
-            <a href="#">View Training</a>
-          </Button>
-        )
-      }
+      { Header: "Phone", accessor: "phone" }
     ];
     return (
       <div>
+        <h2>Customer List</h2>
         <ReactTable
           data={this.state.customers}
           columns={columns}
