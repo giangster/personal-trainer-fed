@@ -12,9 +12,7 @@ export default class CustomerTraining extends Component {
   };
 
   trainingList = id => {
-    fetch(
-      "https://customerrest.herokuapp.com/api/customers/" + id + "/trainings"
-    )
+    fetch(`https://customerrest.herokuapp.com/api/customers/${id}/training`)
       .then(responseData => responseData.json())
       .then(responseData =>
         this.setState({ training: responseData.content, id: id + 1 })

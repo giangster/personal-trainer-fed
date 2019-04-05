@@ -9,7 +9,6 @@ class App extends Component {
       <div className="App">
         <h1>Customer Database</h1>
         <CustomerList />
-        <CustomerTraining />
       </div>
     );
   }

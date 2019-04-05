@@ -21,6 +21,8 @@ export default class CustomerList extends Component {
       .catch(err => console.error(err));
   };
 
+  deleteCustomer = () => {};
+
   render() {
     const columns = [
       { Header: "First name", accessor: "firstname" },
@@ -29,11 +31,19 @@ export default class CustomerList extends Component {
       { Header: "Postcode", accessor: "postcode" },
       { Header: "City", accessor: "city" },
       { Header: "Email", accessor: "email" },
-      { Header: "Phone", accessor: "phone" }
+      { Header: "Phone", accessor: "phone" },
+      {
+        Header: "Training record",
+        accessor: "links[2].href",
+        Cell: value => (
+          <Button color="primary" onClick={() => this.deleteCustomer(value)}>
+            Delete
+          </Button>
+        )
+      }
     ];
     return (
       <div>
-        <h2>Customer List</h2>
         <ReactTable
           data={this.state.customers}
           columns={columns}
