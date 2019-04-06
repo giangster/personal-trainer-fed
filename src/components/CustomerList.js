@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import CustomerTraining from "./CustomerTraining";
+import AddCustomer from "./AddCustomer";
 
 export default class CustomerList extends Component {
   constructor(props) {
@@ -14,6 +15,24 @@ export default class CustomerList extends Component {
 
   componentDidMount = () => {
     this.listCustomer();
+  };
+
+  addCustomer = customer => {
+    fetch("https://customerrest.herokuapp.com/api/customers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(customer)
+    })
+      .then(res => this.listCustomer())
+      .then(res =>
+        this.setState({
+          open: true,
+          message: "New customer added sucessfully!"
+        })
+      )
+      .catch(err => console.error(err));
   };
 
   listCustomer = () => {
@@ -81,6 +100,8 @@ export default class CustomerList extends Component {
     ];
     return (
       <div>
+        <AddCustomer addCustomer={this.addCustomer} />
+        <hr />
         <ReactTable
           data={this.state.customers}
           columns={columns}
