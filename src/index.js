@@ -11,8 +11,7 @@ const routing = (
   <Router>
     <div>
       <Route path="/" component={App} />
-      <Route path="/users" component={CustomerList} />
-      <Route path="/contact" component={CustomerTraining} />
+      <Route path="/CustomerList" component={CustomerList} />
     </div>
   </Router>
 );

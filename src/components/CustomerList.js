@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
+import CustomerTraining from "./CustomerTraining";
 
 export default class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: 1, customers: [], training: [] };
+    this.state = { message: "", customers: [], training: [], open: false };
   }
 
   componentDidMount = () => {
@@ -21,7 +23,33 @@ export default class CustomerList extends Component {
       .catch(err => console.error(err));
   };
 
-  deleteCustomer = () => {};
+  deleteCustomer = link => {
+    if (window.confirm("Are you sure?")) {
+      fetch(link.original.links[0].href, { method: "DELETE" })
+        .then(res => this.listCustomer())
+        .then(res =>
+          this.setState({
+            open: true,
+            message: "Customer deleted sucessfully!"
+          })
+        )
+        .catch(err => console.error(err));
+    }
+  };
+
+  onClickHandler = event => {
+    let id = event.target.id + 4;
+    this.trainingList(id);
+  };
+
+  trainingList = id => {
+    console.log(id);
+    return (
+      <div>
+        <CustomerTraining id={id} />
+      </div>
+    );
+  };
 
   render() {
     const columns = [
@@ -33,11 +61,20 @@ export default class CustomerList extends Component {
       { Header: "Email", accessor: "email" },
       { Header: "Phone", accessor: "phone" },
       {
-        Header: "Training record",
-        accessor: "links[2].href",
+        Header: "",
+        accessor: "links[0].href",
         Cell: value => (
           <Button color="primary" onClick={() => this.deleteCustomer(value)}>
             Delete
+          </Button>
+        )
+      },
+      {
+        Header: "Training record",
+        accessor: "links[1].href",
+        Cell: ({ value, row }) => (
+          <Button color="primary" onClick={() => this.onClickHandler}>
+            Show
           </Button>
         )
       }
@@ -49,6 +86,19 @@ export default class CustomerList extends Component {
           columns={columns}
           sortable={true}
           filterable={true}
+        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          open={this.state.open}
+          autoHideDuration={3000}
+          onClose={this.handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={this.state.message}
         />
       </div>
     );

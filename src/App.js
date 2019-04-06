@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import CustomerList from "./components/CustomerList";
-import CustomerTraining from "./components/CustomerTraining";
 
 class App extends Component {
   render() {
