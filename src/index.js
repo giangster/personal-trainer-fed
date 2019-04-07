@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import CustomerList from "./components/CustomerList";
-import CustomerTraining from "./components/CustomerTraining";
 import * as serviceWorker from "./serviceWorker";
 
 const routing = (

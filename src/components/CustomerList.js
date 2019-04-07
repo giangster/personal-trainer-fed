@@ -2,15 +2,22 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
-import CustomerTraining from "./CustomerTraining";
 import AddCustomer from "./AddCustomer";
+import CustomerTraining from "./CustomerTraining";
 
-export default class CustomerList extends Component {
+class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { message: "", customers: [], training: [], open: false };
+    this.state = {
+      message: "",
+      customers: [],
+      training: [],
+      messageStatusOpen: false,
+      isCustomerList: true,
+      isTrainingList: false,
+      url: ""
+    };
   }
 
   componentDidMount = () => {
@@ -28,7 +35,7 @@ export default class CustomerList extends Component {
       .then(res => this.listCustomer())
       .then(res =>
         this.setState({
-          open: true,
+          messageStatusOpen: true,
           message: "New customer added sucessfully!"
         })
       )
@@ -48,7 +55,7 @@ export default class CustomerList extends Component {
         .then(res => this.listCustomer())
         .then(res =>
           this.setState({
-            open: true,
+            messageStatusOpen: true,
             message: "Customer deleted sucessfully!"
           })
         )
@@ -56,18 +63,18 @@ export default class CustomerList extends Component {
     }
   };
 
-  onClickHandler = event => {
-    let id = event.target.id + 4;
-    this.trainingList(id);
+  trainingList = url => {
+    console.log(url);
+    this.setState({
+      ...this.state,
+      isCustomerList: false,
+      isTrainingList: true,
+      url: url
+    });
   };
 
-  trainingList = id => {
-    console.log(id);
-    return (
-      <div>
-        <CustomerTraining id={id} />
-      </div>
-    );
+  handleClose = () => {
+    this.setState({ messageStatusOpen: false });
   };
 
   render() {
@@ -90,9 +97,9 @@ export default class CustomerList extends Component {
       },
       {
         Header: "Training record",
-        accessor: "links[1].href",
+        accessor: "links[2].href",
         Cell: ({ value, row }) => (
-          <Button color="primary" onClick={() => this.onClickHandler}>
+          <Button color="primary" onClick={() => this.trainingList(value)}>
             Show
           </Button>
         )
@@ -100,28 +107,35 @@ export default class CustomerList extends Component {
     ];
     return (
       <div>
-        <AddCustomer addCustomer={this.addCustomer} />
-        <hr />
-        <ReactTable
-          data={this.state.customers}
-          columns={columns}
-          sortable={true}
-          filterable={true}
-        />
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center"
-          }}
-          open={this.state.open}
-          autoHideDuration={3000}
-          onClose={this.handleClose}
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          message={this.state.message}
-        />
+        {this.state.isCustomerList && (
+          <div>
+            <AddCustomer addCustomer={this.addCustomer} />
+            <hr />
+            <ReactTable
+              data={this.state.customers}
+              columns={columns}
+              sortable={true}
+              filterable={true}
+            />
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+              }}
+              open={this.state.messageStatusOpen}
+              autoHideDuration={3000}
+              onClose={this.handleClose}
+              ContentProps={{
+                "aria-describedby": "message-id"
+              }}
+              message={this.state.message}
+            />
+          </div>
+        )}
+        {this.state.isTrainingList && <CustomerTraining url={this.url} />}
       </div>
     );
   }
 }
+
+export default CustomerList;

@@ -5,15 +5,17 @@ import "react-table/react-table.css";
 export default class CustomerTraining extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: this.props.id, training: [] };
+    this.state = { url: this.props.url, training: [] };
   }
+
   componentDidMount = () => {
-    this.trainingList(this.props.id);
+    this.trainingList(this.props.url);
   };
 
-  trainingList = id => {
-    fetch(`https://customerrest.herokuapp.com/api/customers/${id}/training`)
+  trainingList = url => {
+    fetch(url)
       .then(responseData => responseData.json())
+      .then(responseData => console.log(responseData))
       .then(responseData => this.setState({ training: responseData.content }))
       .catch(err => console.error(err));
   };
