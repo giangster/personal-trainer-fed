@@ -122,7 +122,9 @@ export default class AddCustomer extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Button onClick={this.handleClickOpen}>ADD CUSTOMER</Button>
+        <Button variant="outlined" onClick={this.handleClickOpen}>
+          ADD CUSTOMER
+        </Button>
       </div>
     );
   }

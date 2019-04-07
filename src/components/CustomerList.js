@@ -12,7 +12,6 @@ class CustomerList extends Component {
     this.state = {
       message: "",
       customers: [],
-      training: [],
       messageStatusOpen: false,
       isCustomerList: true,
       isTrainingList: false,
@@ -93,20 +92,28 @@ class CustomerList extends Component {
       { Header: "Email", accessor: "email" },
       { Header: "Phone", accessor: "phone" },
       {
-        Header: "",
-        accessor: "links[0].href",
-        Cell: value => (
-          <Button color="primary" onClick={() => this.deleteCustomer(value)}>
-            Delete
+        Header: "Training record",
+        accessor: "links[2].href",
+        Cell: ({ value, row }) => (
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => this.trainingList(value)}
+          >
+            Show
           </Button>
         )
       },
       {
-        Header: "Training record",
-        accessor: "links[2].href",
-        Cell: ({ value, row }) => (
-          <Button color="primary" onClick={() => this.trainingList(value)}>
-            Show
+        Header: "",
+        accessor: "links[0].href",
+        Cell: value => (
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => this.deleteCustomer(value)}
+          >
+            Delete
           </Button>
         )
       }
@@ -140,7 +147,9 @@ class CustomerList extends Component {
         )}
         {this.state.isTrainingList && (
           <div>
-            <Button onClick={this.customerList}>Back</Button>
+            <Button variant="outlined" onClick={this.customerList}>
+              Back
+            </Button>
             <CustomerTraining url={this.state.url} />
           </div>
         )}

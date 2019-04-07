@@ -28,7 +28,7 @@ export default class CustomerTraining extends Component {
           if (trainingItem.date !== undefined) {
             return Moment(trainingItem.date)
               .local()
-              .format("DD-MM-YYYY hh:mm:ss a");
+              .format("DD-MM-YYYY");
           } else {
             return "";
           }
