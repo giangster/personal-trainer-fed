@@ -72,7 +72,13 @@ class CustomerList extends Component {
       url: url
     });
   };
-
+  customerList = () => {
+    this.setState({
+      ...this.state,
+      isCustomerList: true,
+      isTrainingList: false
+    });
+  };
   handleClose = () => {
     this.setState({ messageStatusOpen: false });
   };
@@ -132,7 +138,12 @@ class CustomerList extends Component {
             />
           </div>
         )}
-        {this.state.isTrainingList && <CustomerTraining url={this.url} />}
+        {this.state.isTrainingList && (
+          <div>
+            <Button onClick={this.customerList}>Back</Button>
+            <CustomerTraining url={this.url} />
+          </div>
+        )}
       </div>
     );
   }
