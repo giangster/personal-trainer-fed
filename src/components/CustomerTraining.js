@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Moment from "moment";
 
 export default class CustomerTraining extends Component {
   constructor(props) {
@@ -9,19 +10,30 @@ export default class CustomerTraining extends Component {
   }
 
   componentDidMount = () => {
-    this.trainingList(this.props.url);
+    this.trainingList(this.state.url);
   };
 
   trainingList = url => {
     fetch(url)
       .then(responseData => responseData.json())
-      .then(responseData => console.log(responseData))
       .then(responseData => this.setState({ training: responseData.content }))
       .catch(err => console.error(err));
   };
   render() {
     const columns = [
-      { Header: "Date", accessor: "date" },
+      {
+        Header: "Date",
+        id: "date",
+        accessor: trainingItem => {
+          if (trainingItem.date !== undefined) {
+            return Moment(trainingItem.date)
+              .local()
+              .format("DD-MM-YYYY hh:mm:ss a");
+          } else {
+            return "";
+          }
+        }
+      },
       { Header: "Duration", accessor: "duration" },
       { Header: "Activity", accessor: "activity" }
     ];

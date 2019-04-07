@@ -141,7 +141,7 @@ class CustomerList extends Component {
         {this.state.isTrainingList && (
           <div>
             <Button onClick={this.customerList}>Back</Button>
-            <CustomerTraining url={this.url} />
+            <CustomerTraining url={this.state.url} />
           </div>
         )}
       </div>
