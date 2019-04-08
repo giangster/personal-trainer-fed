@@ -114,10 +114,10 @@ export default class AddCustomer extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="default">
               Cancel
             </Button>
-            <Button onClick={this.addCustomer} color="primary">
+            <Button onClick={this.addCustomer} color="default">
               Save
             </Button>
           </DialogActions>

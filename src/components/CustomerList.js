@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddCustomer from "./AddCustomer";
 import CustomerTraining from "./CustomerTraining";
+import EditCustomer from "./EditCustomer";
 
 class CustomerList extends Component {
   constructor(props) {
@@ -49,17 +50,35 @@ class CustomerList extends Component {
   };
 
   deleteCustomer = link => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm("Are you 100% sure?")) {
       fetch(link.original.links[0].href, { method: "DELETE" })
         .then(res => this.listCustomer())
         .then(res =>
           this.setState({
-            messageStatusOpen: true,
+            messageOpenStatus: true,
             message: "Customer deleted sucessfully!"
           })
         )
         .catch(err => console.error(err));
     }
+  };
+
+  editCustomer = (link, updatedCustomer) => {
+    fetch(link, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedCustomer)
+    })
+      .then(res => this.listCustomer())
+      .then(res =>
+        this.setState({
+          messageOpenStatus: true,
+          message: "Customer updated sucessfully!"
+        })
+      )
+      .catch(err => console.error(err));
   };
 
   trainingList = url => {
@@ -71,6 +90,7 @@ class CustomerList extends Component {
       url: url
     });
   };
+
   customerList = () => {
     this.setState({
       ...this.state,
@@ -78,8 +98,9 @@ class CustomerList extends Component {
       isTrainingList: false
     });
   };
+
   handleClose = () => {
-    this.setState({ messageStatusOpen: false });
+    this.setState({ messageOpenStatus: false });
   };
 
   render() {
@@ -97,11 +118,24 @@ class CustomerList extends Component {
         Cell: ({ value, row }) => (
           <Button
             variant="outlined"
-            color="primary"
+            color="default"
             onClick={() => this.trainingList(value)}
           >
             Show
           </Button>
+        )
+      },
+      {
+        Header: "",
+        accessor: "links[0].href",
+        Cell: ({ value, row }) => (
+          <EditCustomer
+            editCustomer={this.editCustomer}
+            customer={row}
+            link={value}
+          >
+            Edit
+          </EditCustomer>
         )
       },
       {
@@ -123,7 +157,7 @@ class CustomerList extends Component {
         {this.state.isCustomerList && (
           <div>
             <AddCustomer addCustomer={this.addCustomer} />
-            <hr />
+            <br />
             <ReactTable
               data={this.state.customers}
               columns={columns}
@@ -135,7 +169,7 @@ class CustomerList extends Component {
                 vertical: "bottom",
                 horizontal: "center"
               }}
-              open={this.state.messageStatusOpen}
+              open={this.state.messageOpenStatus}
               autoHideDuration={3000}
               onClose={this.handleClose}
               ContentProps={{
