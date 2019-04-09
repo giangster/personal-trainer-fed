@@ -6,6 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import AddCustomer from "./AddCustomer";
 import CustomerTraining from "./CustomerTraining";
 import EditCustomer from "./EditCustomer";
+import DeleteCustomer from "./DeleteCustomer";
 
 class CustomerList extends Component {
   constructor(props) {
@@ -50,17 +51,15 @@ class CustomerList extends Component {
   };
 
   deleteCustomer = link => {
-    if (window.confirm("Are you 100% sure?")) {
-      fetch(link.original.links[0].href, { method: "DELETE" })
-        .then(res => this.listCustomer())
-        .then(res =>
-          this.setState({
-            messageOpenStatus: true,
-            message: "Customer deleted sucessfully!"
-          })
-        )
-        .catch(err => console.error(err));
-    }
+    fetch(link, { method: "DELETE" })
+      .then(res => this.listCustomer())
+      .then(res =>
+        this.setState({
+          messageOpenStatus: true,
+          message: "Customer deleted sucessfully!"
+        })
+      )
+      .catch(err => console.error(err));
   };
 
   editCustomer = (link, updatedCustomer) => {
@@ -141,14 +140,8 @@ class CustomerList extends Component {
       {
         Header: "",
         accessor: "links[0].href",
-        Cell: value => (
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => this.deleteCustomer(value)}
-          >
-            Delete
-          </Button>
+        Cell: ({ value, row }) => (
+          <DeleteCustomer deleteCustomer={this.deleteCustomer} link={value} />
         )
       }
     ];
