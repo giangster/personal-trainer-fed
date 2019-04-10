@@ -81,7 +81,6 @@ class CustomerList extends Component {
   };
 
   trainingList = url => {
-    console.log(url);
     this.setState({
       ...this.state,
       isCustomerList: false,
@@ -175,7 +174,7 @@ class CustomerList extends Component {
         {this.state.isTrainingList && (
           <div>
             <Button variant="outlined" onClick={this.customerList}>
-              Back
+              &laquo; Back
             </Button>
             <CustomerTraining url={this.state.url} />
           </div>

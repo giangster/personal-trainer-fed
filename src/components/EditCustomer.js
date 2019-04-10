@@ -60,7 +60,7 @@ export default class EditCustomer extends Component {
       <div>
         <Button
           variant="outlined"
-          color="default"
+          color="primary"
           onClick={this.handleClickOpen}
         >
           Edit
