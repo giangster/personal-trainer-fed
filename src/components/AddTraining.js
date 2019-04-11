@@ -29,7 +29,7 @@ export default class AddTraining extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  addCustomer = () => {
+  addTraining = () => {
     const newTraining = {
       date: this.state.date,
       duration: this.state.duration,
@@ -38,6 +38,7 @@ export default class AddTraining extends Component {
     this.props.addTraining(newTraining);
     this.handleClose();
   };
+
   render() {
     return (
       <div>

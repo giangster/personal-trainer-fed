@@ -30,11 +30,27 @@ export default class CustomerTraining extends Component {
       .catch(err => console.error(err));
   };
 
-  addTraining = training => {};
+  addTraining = training => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(training)
+    })
+      .then(res => this.trainingList())
+      .then(res =>
+        this.setState({
+          messageStatusOpen: true,
+          message: "New training added sucessfully!"
+        })
+      )
+      .catch(err => console.error(err));
+  };
 
   deleteTraining = link => {
     fetch(link, { method: "DELETE" })
-      .then(res => this.trainingList())
+      .then(res => this.trainingList(this.state.url))
       .then(res =>
         this.setState({
           messageOpenStatus: true,

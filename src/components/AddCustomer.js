@@ -46,6 +46,7 @@ export default class AddCustomer extends Component {
     this.props.addCustomer(newCustomer);
     this.handleClose();
   };
+
   render() {
     return (
       <div>
