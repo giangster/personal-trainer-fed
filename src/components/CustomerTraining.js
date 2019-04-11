@@ -32,6 +32,18 @@ export default class CustomerTraining extends Component {
 
   addTraining = training => {};
 
+  deleteTraining = link => {
+    fetch(link, { method: "DELETE" })
+      .then(res => this.trainingList())
+      .then(res =>
+        this.setState({
+          messageOpenStatus: true,
+          message: "Training deleted sucessfully!"
+        })
+      )
+      .catch(err => console.error(err));
+  };
+
   editTraining = (link, updatedTraining) => {
     console.log(link);
     fetch(link, {
@@ -50,6 +62,7 @@ export default class CustomerTraining extends Component {
       )
       .catch(err => console.log(err));
   };
+
   render() {
     const columns = [
       {
@@ -83,7 +96,9 @@ export default class CustomerTraining extends Component {
       {
         Header: "",
         accessor: "links[0].href",
-        Cell: ({ value, row }) => <DeleteTraining />
+        Cell: ({ value, row }) => (
+          <DeleteTraining deleteTraining={this.deleteTraining} link={value} />
+        )
       }
     ];
     return (
