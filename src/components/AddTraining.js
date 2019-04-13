@@ -13,7 +13,9 @@ export default class AddTraining extends Component {
       open: false,
       date: "",
       duration: "",
-      activity: ""
+      activity: "",
+      customer: "",
+      url: ""
     };
   }
 
@@ -33,7 +35,9 @@ export default class AddTraining extends Component {
     const newTraining = {
       date: this.state.date,
       duration: this.state.duration,
-      activity: this.state.activity
+      activity: this.state.activity,
+      customer:
+        window.location.href + "api/customers/" + this.props.url.match(/\d+/)[0]
     };
     this.props.addTraining(newTraining);
     this.handleClose();

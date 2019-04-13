@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Moment from "moment";
 import EditTraining from "./EditTraining";
@@ -24,6 +23,7 @@ export default class CustomerTraining extends Component {
   };
 
   trainingList = url => {
+    console.log(this.state.url);
     fetch(url)
       .then(responseData => responseData.json())
       .then(responseData => this.setState({ training: responseData.content }))
@@ -31,14 +31,14 @@ export default class CustomerTraining extends Component {
   };
 
   addTraining = training => {
-    fetch(url, {
+    fetch("https://customerrest.herokuapp.com/api/trainings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(training)
     })
-      .then(res => this.trainingList())
+      .then(res => this.trainingList(this.state.url))
       .then(res =>
         this.setState({
           messageStatusOpen: true,
@@ -120,7 +120,7 @@ export default class CustomerTraining extends Component {
     return (
       <div>
         <br />
-        <AddTraining addTraining={this.addTraining} />
+        <AddTraining addTraining={this.addTraining} url={this.state.url} />
         <h2>Training Record</h2>
         <ReactTable data={this.state.training} columns={columns} />
         <Snackbar
