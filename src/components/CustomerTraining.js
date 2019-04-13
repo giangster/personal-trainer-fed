@@ -3,7 +3,6 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Snackbar from "@material-ui/core/Snackbar";
 import Moment from "moment";
-import EditTraining from "./EditTraining";
 import DeleteTraining from "./DeleteTraining";
 import AddTraining from "./AddTraining";
 
@@ -60,25 +59,6 @@ export default class CustomerTraining extends Component {
       .catch(err => console.error(err));
   };
 
-  editTraining = (link, updatedTraining) => {
-    console.log(link);
-    fetch(link, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(updatedTraining)
-    })
-      .then(res => this.trainingList())
-      .then(res =>
-        this.setState({
-          messageOpenStatus: true,
-          message: "Training updated successfully!"
-        })
-      )
-      .catch(err => console.log(err));
-  };
-
   render() {
     const columns = [
       {
@@ -96,19 +76,7 @@ export default class CustomerTraining extends Component {
       },
       { Header: "Duration", accessor: "duration" },
       { Header: "Activity", accessor: "activity" },
-      {
-        Header: "",
-        accessor: "links[0].href",
-        Cell: ({ value, row }) => (
-          <EditTraining
-            editTraining={this.editTraining}
-            training={row}
-            link={value}
-          >
-            Edit
-          </EditTraining>
-        )
-      },
+
       {
         Header: "",
         accessor: "links[0].href",

@@ -101,6 +101,13 @@ class CustomerList extends Component {
     this.setState({ messageOpenStatus: false });
   };
 
+  filterMethod = (filter, row, column) => {
+    const id = filter.pivotId || filter.id;
+    return row[id] !== undefined
+      ? String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase())
+      : true;
+  };
+
   render() {
     const columns = [
       { Header: "First name", accessor: "firstname" },
@@ -155,6 +162,7 @@ class CustomerList extends Component {
               columns={columns}
               sortable={true}
               filterable={true}
+              defaultFilterMethod={this.filterMethod}
             />
             <Snackbar
               anchorOrigin={{
