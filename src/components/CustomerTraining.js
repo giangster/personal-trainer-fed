@@ -5,6 +5,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Moment from "moment";
 import DeleteTraining from "./DeleteTraining";
 import AddTraining from "./AddTraining";
+import GetAllTrainings from "./GetAllTrainings";
 
 export default class CustomerTraining extends Component {
   constructor(props) {
@@ -22,10 +23,16 @@ export default class CustomerTraining extends Component {
   };
 
   trainingList = url => {
-    console.log(this.state.url);
     fetch(url)
       .then(responseData => responseData.json())
       .then(responseData => this.setState({ training: responseData.content }))
+      .catch(err => console.error(err));
+  };
+
+  getAllTrainings = () => {
+    fetch("https://customerrest.herokuapp.com/gettrainings", { method: "GET" })
+      .then(response => response.json())
+      .then(response => console.log(response))
       .catch(err => console.error(err));
   };
 
@@ -81,14 +88,23 @@ export default class CustomerTraining extends Component {
         Header: "",
         accessor: "links[0].href",
         Cell: ({ value, row }) => (
-          <DeleteTraining deleteTraining={this.deleteTraining} link={value} />
+          <DeleteTraining
+            deleteTraining={this.deleteTraining}
+            link={value}
+            training={this.state.training}
+          />
         )
       }
     ];
     return (
       <div>
         <br />
-        <AddTraining addTraining={this.addTraining} url={this.state.url} />
+        <div style={{ display: "inline-block", margin: 10 }}>
+          <AddTraining addTraining={this.addTraining} url={this.state.url} />
+        </div>
+        <div style={{ display: "inline-block", margin: 10 }}>
+          <GetAllTrainings getAllTrainings={this.getAllTrainings} />
+        </div>
         <h2>Training Record</h2>
         <ReactTable data={this.state.training} columns={columns} />
         <Snackbar

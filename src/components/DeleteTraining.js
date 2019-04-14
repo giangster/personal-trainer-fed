@@ -30,34 +30,42 @@ export default class DeleteTraining extends Component {
   render() {
     return (
       <div>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={this.handleClickOpen}
-        >
-          Delete
-        </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">Delete Training</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you want to delete this training record?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              No
+        {this.props.training.length !== 0 && (
+          <div>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={this.handleClickOpen}
+            >
+              Delete
             </Button>
-            <Button onClick={this.deleteTraining} color="secondary" autoFocus>
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">Delete Training</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Are you sure you want to delete this training record?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  No
+                </Button>
+                <Button
+                  onClick={this.deleteTraining}
+                  color="secondary"
+                  autoFocus
+                >
+                  Yes
+                </Button>
+              </DialogActions>
+            </Dialog>{" "}
+          </div>
+        )}
       </div>
     );
   }
