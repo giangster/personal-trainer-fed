@@ -151,6 +151,7 @@ class CustomerList extends Component {
         )
       }
     ];
+
     return (
       <div>
         {this.state.isCustomerList && (
@@ -181,10 +182,10 @@ class CustomerList extends Component {
         )}
         {this.state.isTrainingList && (
           <div>
-            <Button variant="outlined" onClick={this.customerList}>
-              &laquo; Back
-            </Button>
-            <CustomerTraining url={this.state.url} />
+            <CustomerTraining
+              url={this.state.url}
+              customerList={this.customerList}
+            />
           </div>
         )}
       </div>

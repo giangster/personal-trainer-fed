@@ -6,6 +6,7 @@ import Moment from "moment";
 import DeleteTraining from "./DeleteTraining";
 import AddTraining from "./AddTraining";
 import GetAllTrainings from "./GetAllTrainings";
+import Button from "@material-ui/core/Button";
 
 export default class CustomerTraining extends Component {
   constructor(props) {
@@ -14,7 +15,9 @@ export default class CustomerTraining extends Component {
       url: this.props.url,
       training: [],
       messageOpenStatus: false,
-      message: ""
+      message: "",
+      isCustomerTraining: true,
+      isAllTraining: false
     };
   }
 
@@ -26,13 +29,6 @@ export default class CustomerTraining extends Component {
     fetch(url)
       .then(responseData => responseData.json())
       .then(responseData => this.setState({ training: responseData.content }))
-      .catch(err => console.error(err));
-  };
-
-  getAllTrainings = () => {
-    fetch("https://customerrest.herokuapp.com/gettrainings", { method: "GET" })
-      .then(response => response.json())
-      .then(response => console.log(response))
       .catch(err => console.error(err));
   };
 
@@ -64,6 +60,14 @@ export default class CustomerTraining extends Component {
         })
       )
       .catch(err => console.error(err));
+  };
+
+  listAllTraining = () => {
+    this.setState({
+      ...this.state,
+      isCustomerTraining: false,
+      isAllTraining: true
+    });
   };
 
   render() {
@@ -98,28 +102,50 @@ export default class CustomerTraining extends Component {
     ];
     return (
       <div>
-        <br />
-        <div style={{ display: "inline-block", margin: 10 }}>
-          <AddTraining addTraining={this.addTraining} url={this.state.url} />
-        </div>
-        <div style={{ display: "inline-block", margin: 10 }}>
-          <GetAllTrainings getAllTrainings={this.getAllTrainings} />
-        </div>
-        <h2>Training Record</h2>
-        <ReactTable data={this.state.training} columns={columns} />
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center"
-          }}
-          open={this.state.messageOpenStatus}
-          autoHideDuration={3000}
-          onClose={this.handleClose}
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          message={this.state.message}
-        />
+        {this.state.isAllTraining && (
+          <div>
+            <GetAllTrainings componentDidMount={this.componentDidMount} />
+          </div>
+        )}
+        {this.state.isCustomerTraining && (
+          <div>
+            <br />
+            <Button
+              style={{ display: "block", margin: 10, position: "absolute" }}
+              variant="outlined"
+              onClick={this.props.customerList}
+            >
+              &laquo; Back
+            </Button>
+            <div style={{ display: "inline-block", margin: 10 }}>
+              <AddTraining
+                addTraining={this.addTraining}
+                url={this.state.url}
+              />
+            </div>
+            <div style={{ display: "inline-block", margin: 10 }}>
+              <Button variant="outlined" onClick={this.listAllTraining}>
+                Get All Training
+              </Button>
+            </div>
+            <h2>Training Record</h2>
+            <ReactTable data={this.state.training} columns={columns} />
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+              }}
+              open={this.state.messageOpenStatus}
+              autoHideDuration={3000}
+              onClose={this.handleClose}
+              ContentProps={{
+                "aria-describedby": "message-id"
+              }}
+              message={this.state.message}
+            />
+            )}
+          </div>
+        )}
       </div>
     );
   }
