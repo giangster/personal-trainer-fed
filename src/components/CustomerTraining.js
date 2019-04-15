@@ -26,9 +26,16 @@ export default class CustomerTraining extends Component {
   };
 
   trainingList = url => {
+    console.log("HEY HEY");
     fetch(url)
       .then(responseData => responseData.json())
-      .then(responseData => this.setState({ training: responseData.content }))
+      .then(responseData =>
+        this.setState({
+          training: responseData.content,
+          isAllTraining: false,
+          isCustomerTraining: true
+        })
+      )
       .catch(err => console.error(err));
   };
 
@@ -104,7 +111,10 @@ export default class CustomerTraining extends Component {
       <div>
         {this.state.isAllTraining && (
           <div>
-            <GetAllTrainings componentDidMount={this.componentDidMount} />
+            <GetAllTrainings
+              trainingList={this.trainingList}
+              url={this.state.url}
+            />
           </div>
         )}
         {this.state.isCustomerTraining && (

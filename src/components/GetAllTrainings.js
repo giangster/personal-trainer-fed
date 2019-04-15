@@ -13,7 +13,8 @@ export default class GetAllTrainings extends Component {
   }
 
   componentDidMount() {
-    this.setState({ _isMounted: true });
+    // this.setState({ _isMounted: true });
+    this.getAllTrainings();
   }
 
   getAllTrainings = () => {
@@ -23,10 +24,14 @@ export default class GetAllTrainings extends Component {
       .catch(err => console.error(err));
   };
 
-  componentWillUnmount = () => {
-    this.setState({ _isMounted: false });
-    this.props.componentDidMount();
+  trainingList = () => {
+    this.props.trainingList(this.props.url);
   };
+
+  // componentWillUnmount = () => {
+  //   this.setState({ _isMounted: false });
+  //   this.props.componentDidMount();
+  // };
 
   render() {
     const columns = [
@@ -44,7 +49,7 @@ export default class GetAllTrainings extends Component {
         <Button
           style={{ display: "inline-block", margin: 10 }}
           variant="outlined"
-          onClick={this.componentWillUnmount}
+          onClick={this.trainingList}
         >
           &laquo; Backkk
         </Button>
