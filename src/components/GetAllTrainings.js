@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Moment from "moment";
 
 export default class GetAllTrainings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allTraining: [],
-      _isMounted: false
+      allTraining: []
     };
   }
 
   componentDidMount() {
-    // this.setState({ _isMounted: true });
     this.getAllTrainings();
   }
 
@@ -28,21 +27,32 @@ export default class GetAllTrainings extends Component {
     this.props.trainingList(this.props.url);
   };
 
-  // componentWillUnmount = () => {
-  //   this.setState({ _isMounted: false });
-  //   this.props.componentDidMount();
-  // };
-
   render() {
     const columns = [
-      { Header: "Date", accessor: "date" },
+      {
+        Header: "Date",
+        id: "date",
+        accessor: trainingItem => {
+          if (trainingItem.date !== undefined) {
+            return Moment(trainingItem.date)
+              .local()
+              .format("DD-MM-YYYY");
+          } else {
+            return "";
+          }
+        }
+      },
       { Header: "Duration", accessor: "duration" },
       { Header: "Activity", accessor: "activity" },
       { Header: "Customer ID", accessor: "customer.id" },
-      { Header: "First Name", accessor: "customer.firstname" }
+      { Header: "First Name", accessor: "customer.firstname" },
+      { Header: "Last Name", accessor: "customer.lastname" },
+      { Header: "Address", accessor: "customer.streetaddress" },
+      { Header: "Postcode", accessor: "customer.postcode" },
+      { Header: "City", accessor: "customer.city" },
+      { Header: "Email", accessor: "customer.email" },
+      { Header: "Phone", accessor: "customer.phone" }
     ];
-
-    console.log(this.state.allTraining);
 
     return (
       <div>
@@ -51,7 +61,7 @@ export default class GetAllTrainings extends Component {
           variant="outlined"
           onClick={this.trainingList}
         >
-          &laquo; Backkk
+          &laquo; Back
         </Button>
         <ReactTable data={this.state.allTraining} columns={columns} />
       </div>

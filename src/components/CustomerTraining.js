@@ -26,7 +26,6 @@ export default class CustomerTraining extends Component {
   };
 
   trainingList = url => {
-    console.log("HEY HEY");
     fetch(url)
       .then(responseData => responseData.json())
       .then(responseData =>
