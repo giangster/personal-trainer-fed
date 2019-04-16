@@ -27,6 +27,13 @@ export default class GetAllTrainings extends Component {
     this.props.trainingList(this.props.url);
   };
 
+  filterMethod = (filter, row, column) => {
+    const id = filter.pivotId || filter.id;
+    return row[id] !== undefined
+      ? String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase())
+      : true;
+  };
+
   render() {
     const columns = [
       {
@@ -63,7 +70,13 @@ export default class GetAllTrainings extends Component {
         >
           &laquo; Back
         </Button>
-        <ReactTable data={this.state.allTraining} columns={columns} />
+        <ReactTable
+          data={this.state.allTraining}
+          columns={columns}
+          sortable={true}
+          filterable={true}
+          defaultFilterMethod={this.filterMethod}
+        />
       </div>
     );
   }
