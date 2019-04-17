@@ -64,7 +64,10 @@ export default class GetAllTrainings extends Component {
     return (
       <div>
         <Button
-          style={{ display: "inline-block", margin: 10 }}
+          style={{
+            display: "inline-block",
+            margin: 10
+          }}
           variant="outlined"
           onClick={this.trainingList}
         >

@@ -123,13 +123,7 @@ export default class AddCustomer extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Button
-          onClick={this.handleClickOpen}
-          style={{
-            background:
-              "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"
-          }}
-        >
+        <Button onClick={this.handleClickOpen} variant="outlined">
           ADD CUSTOMER
         </Button>
       </div>

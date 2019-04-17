@@ -120,7 +120,11 @@ export default class CustomerTraining extends Component {
           <div>
             <br />
             <Button
-              style={{ display: "block", margin: 10, position: "absolute" }}
+              style={{
+                display: "block",
+                margin: 10,
+                position: "absolute"
+              }}
               variant="outlined"
               onClick={this.props.customerList}
             >

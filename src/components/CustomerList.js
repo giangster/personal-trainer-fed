@@ -124,10 +124,7 @@ class CustomerList extends Component {
           <Button
             color="default"
             onClick={() => this.trainingList(value)}
-            style={{
-              background:
-                "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"
-            }}
+            variant="outlined"
           >
             Show
           </Button>

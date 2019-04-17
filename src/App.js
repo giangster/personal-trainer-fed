@@ -24,14 +24,19 @@ class App extends Component {
           color="default"
           style={{
             background:
-              "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"
+              "linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%)"
           }}
         >
           <Toolbar>
             <IconButton color="inherit" aria-label="Open drawer">
-              <HomeIcon />
+              <HomeIcon style={{ color: "white" }} />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              style={{ color: "white" }}
+            >
               Personal Training
             </Typography>
           </Toolbar>
