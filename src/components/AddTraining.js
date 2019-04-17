@@ -60,7 +60,11 @@ export default class AddTraining extends Component {
               margin="dense"
               name="date"
               label="Date"
+              type="date"
               fullWidth
+              InputLabelProps={{
+                shrink: true
+              }}
             />
             <TextField
               onChange={this.handleChange}

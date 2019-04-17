@@ -145,7 +145,7 @@ export default class CustomerTraining extends Component {
                 horizontal: "center"
               }}
               open={this.state.messageOpenStatus}
-              autoHideDuration={3000}
+              autoHideDuration={2000}
               onClose={this.handleClose}
               ContentProps={{
                 "aria-describedby": "message-id"

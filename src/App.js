@@ -5,7 +5,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
+import SvgIcon from "@material-ui/core/SvgIcon";
+
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 class App extends Component {
   render() {
@@ -14,7 +22,7 @@ class App extends Component {
         <AppBar position="static" color="default">
           <Toolbar>
             <IconButton color="inherit" aria-label="Open drawer">
-              <MenuIcon />
+              <HomeIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
               Personal Training
