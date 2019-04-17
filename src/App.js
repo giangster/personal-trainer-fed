@@ -19,7 +19,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppBar position="static" color="default">
+        <AppBar
+          position="static"
+          color="default"
+          style={{
+            background:
+              "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"
+          }}
+        >
           <Toolbar>
             <IconButton color="inherit" aria-label="Open drawer">
               <HomeIcon />

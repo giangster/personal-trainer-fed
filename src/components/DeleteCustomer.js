@@ -31,9 +31,12 @@ export default class DeleteCustomer extends Component {
     return (
       <div>
         <Button
-          variant="outlined"
-          color="secondary"
+          color="default"
           onClick={this.handleClickOpen}
+          style={{
+            background:
+              "linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #bc4b4b 100%"
+          }}
         >
           Delete
         </Button>

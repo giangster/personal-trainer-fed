@@ -92,7 +92,13 @@ export default class AddTraining extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Button variant="outlined" onClick={this.handleClickOpen}>
+        <Button
+          onClick={this.handleClickOpen}
+          style={{
+            background:
+              "linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)"
+          }}
+        >
           ADD TRAINING
         </Button>
       </div>
