@@ -4,7 +4,7 @@ import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import AddCustomer from "./AddCustomer";
-import CustomerTraining from "./CustomerTraining";
+import CustomerTraining from "../CustomerTraining";
 import EditCustomer from "./EditCustomer";
 import DeleteCustomer from "./DeleteCustomer";
 
