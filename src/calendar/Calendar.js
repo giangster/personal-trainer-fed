@@ -20,17 +20,23 @@ export default class Calendar extends Component {
     };
   }
 
+  componentDidMount = () => {
+    this.getAllTrainings();
+  };
+
   getAllTrainings = () => {
     fetch("https://customerrest.herokuapp.com/gettrainings")
       .then(response => response.json())
       .then(response =>
         response.map((response, index) => {
           const training = {
-            title: response[index].activity,
-            start: new Date(response[index].date),
-            end: new Date(response[index].date)
+            title: response.activity,
+            start: new Date(response.date),
+            end: new Date(response.date),
+            allDay: false,
+            resource: ""
           };
-          this.setState({ allTraining: [this.state.allTraining, training] });
+          this.setState({ allTraining: [...this.state.allTraining, training] });
         })
       )
       .catch(err => console.error(err));
