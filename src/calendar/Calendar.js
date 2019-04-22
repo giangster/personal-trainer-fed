@@ -21,14 +21,10 @@ export default class Calendar extends Component {
   }
 
   componentDidMount = () => {
-    this.getAllTrainings();
-  };
-
-  getAllTrainings = () => {
     fetch("https://customerrest.herokuapp.com/gettrainings")
       .then(response => response.json())
       .then(response =>
-        response.map((response, index) => {
+        response.forEach(response => {
           const training = {
             title: response.activity,
             start: new Date(response.date),
