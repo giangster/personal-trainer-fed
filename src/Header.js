@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import CustomerList from "./components/CustomerList";
 
 function HomeIcon(props) {
   return (
@@ -36,8 +37,14 @@ const Header = props => {
           }}
         >
           <Toolbar>
-            <IconButton color="inherit" aria-label="Open drawer">
-              <HomeIcon style={{ color: "white" }} />
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={() => <CustomerList />}
+            >
+              <Link to="/" style={{ margin: 0 }}>
+                <HomeIcon style={{ color: "white", marginTop: 5 }} />
+              </Link>
             </IconButton>
             <Typography
               variant="h6"
@@ -51,6 +58,9 @@ const Header = props => {
                 </Link>
                 <Link to="/calendar" style={style}>
                   Calendar
+                </Link>
+                <Link to="/login" style={style}>
+                  Log In
                 </Link>
               </div>
             </Typography>

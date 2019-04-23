@@ -5,7 +5,9 @@ import { createBrowserHistory } from "history";
 import App from "./App";
 import Calendar from "./calendar/Calendar";
 import Header from "./Header";
+import LogIn from "./LogIn";
 import "./index.css";
+import * as firebaseui from "firebaseui";
 
 const history = createBrowserHistory();
 
@@ -26,6 +28,14 @@ ReactDOM.render(
         render={() => (
           <Header>
             <Calendar />
+          </Header>
+        )}
+      />
+      <Route
+        path="/login"
+        render={() => (
+          <Header>
+            <LogIn />
           </Header>
         )}
       />
