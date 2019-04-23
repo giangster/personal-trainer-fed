@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import App from "./App";
-import Calendar from "./calendar/Calendar";
+import Calendar from "./components/calendar/Calendar";
 import Header from "./Header";
-import LogIn from "./LogIn";
+import LogIn from "./components/login/LogInPage";
 import "./index.css";
 import * as firebaseui from "firebaseui";
 

@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import CustomerList from "./components/CustomerList";
+import CustomerList from "./components/home/CustomerList";
 
 function HomeIcon(props) {
   return (
