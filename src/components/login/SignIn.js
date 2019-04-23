@@ -22,7 +22,8 @@ const styles = theme => ({
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
       marginLeft: "auto",
-      marginRight: "auto"
+      marginRight: "auto",
+      fontFamily: "RobotoCondensed"
     }
   },
   paper: {
@@ -88,6 +89,16 @@ function SignIn(props) {
           </Button>
         </form>
       </Paper>
+      <Button
+        style={{
+          display: "block",
+          margin: 10
+        }}
+        variant="outlined"
+        onClick={this.props.openLogInPage}
+      >
+        &laquo; Back
+      </Button>
     </main>
   );
 }

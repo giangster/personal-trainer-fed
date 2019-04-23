@@ -7,15 +7,15 @@ export default class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSignInPage: true,
+      openLogInPage: true,
       openSignIn: false,
       openSignUp: false
     };
   }
 
-  openSignIn = () => {
+  openLogInPage = () => {
     this.setState({
-      openSignInPage: false,
+      openLogInPage: true,
       openSignIn: true,
       openSignUp: false
     });
@@ -23,7 +23,15 @@ export default class LogIn extends Component {
 
   openSignIn = () => {
     this.setState({
-      openSignInPage: false,
+      openLogInPage: false,
+      openSignIn: true,
+      openSignUp: false
+    });
+  };
+
+  openSignUp = () => {
+    this.setState({
+      openLogInPage: false,
       openSignIn: false,
       openSignUp: true
     });
@@ -32,7 +40,7 @@ export default class LogIn extends Component {
   render() {
     return (
       <div>
-        {this.state.openSignInPage && (
+        {this.state.openLogInPage && (
           <div>
             <h1 style={{ margin: 50, position: "" }}>
               Create your own training schedule <br />
@@ -48,8 +56,8 @@ export default class LogIn extends Component {
             </Button>
           </div>
         )}
-        {this.state.openSignIn && <SignIn />}
-        {this.state.openSignUp && <SignUp />}
+        {this.state.openSignIn && <SignIn openLogInPage={this.openLogInPage} />}
+        {this.state.openSignUp && <SignUp openLogInPage={this.openLogInPage} />}
       </div>
     );
   }
