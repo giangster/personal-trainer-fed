@@ -58,6 +58,7 @@ export default class LogIn extends Component {
               onChange={this.handleChange}
               autoFocus
               margin="dense"
+              type="password"
               name="password"
               label="Password"
               fullWidth
@@ -72,6 +73,10 @@ export default class LogIn extends Component {
             </Button>
           </DialogActions>
         </Dialog>
+        <h1 style={{ margin: 50, position: "" }}>
+          Get your own training schedule <br />
+          and see how well you are performing everyday!
+        </h1>
         <p>Log in to check your training schedule</p>
         <Button onClick={this.handleClickOpen} variant="outlined">
           Log in

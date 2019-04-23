@@ -50,15 +50,19 @@ const Header = props => {
               variant="h6"
               color="inherit"
               noWrap
-              style={{ color: "white" }}
+              style={{ color: "white", width: "100%" }}
             >
               <div>
-                <Link to="/" style={style}>
-                  Home
-                </Link>
-                <Link to="/calendar" style={style}>
-                  Calendar
-                </Link>
+                <div style={{ float: "left" }}>
+                  <Link to="/" style={style}>
+                    Home
+                  </Link>
+                  <Link to="/calendar" style={style}>
+                    Calendar
+                  </Link>
+                </div>
+              </div>
+              <div style={{ float: "right" }}>
                 <Link to="/login" style={style}>
                   Log In
                 </Link>
