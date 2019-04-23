@@ -16,7 +16,7 @@ export default class LogIn extends Component {
   openLogInPage = () => {
     this.setState({
       openLogInPage: true,
-      openSignIn: true,
+      openSignIn: false,
       openSignUp: false
     });
   };
@@ -42,7 +42,7 @@ export default class LogIn extends Component {
       <div>
         {this.state.openLogInPage && (
           <div>
-            <h1 style={{ margin: 50, position: "" }}>
+            <h1 style={{ margin: 50, display: "center" }}>
               Create your own training schedule <br />
               and see how well you perform!
             </h1>

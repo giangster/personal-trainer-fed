@@ -91,11 +91,11 @@ function SignIn(props) {
       </Paper>
       <Button
         style={{
-          display: "block",
+          display: "center",
           margin: 10
         }}
         variant="outlined"
-        onClick={this.props.openLogInPage}
+        onClick={props.openLogInPage}
       >
         &laquo; Back
       </Button>

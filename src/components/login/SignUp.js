@@ -11,7 +11,7 @@ export default class SignUp extends Component {
         <h3>Sign Up today!</h3>
         <Button
           style={{
-            display: "block",
+            display: "center",
             margin: 10
           }}
           variant="outlined"
