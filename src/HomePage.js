@@ -4,10 +4,9 @@ import Button from "@material-ui/core/Button";
 
 var homePageStyle = {
   width: "100%",
-  height: 700,
-
+  height: 1000,
   backgroundImage: "url(" + personaltrainer + ")",
-  backgroundPosition: "center",
+  backgroundPosition: "bottom",
   backgroundSize: "cover"
 };
 
@@ -15,12 +14,12 @@ export default class HomePage extends Component {
   render() {
     return (
       <div style={homePageStyle}>
-        <h1 style={{ color: "white", fontStyle: "bolder" }}>
-          <strong>Welcome to Personal Trainer Company</strong>
+        <h1 style={{ marginBottom: 20, fontStyle: "bolder", fontSize: 50 }}>
+          Welcome to Personal Trainer Company
         </h1>
         <br />
         <br />
-        <h2>
+        <h2 style={{ marginBottom: 20, fontStyle: "bolder", fontSize: 40 }}>
           <strong>Get fit everyday!</strong>
         </h2>
         <br />

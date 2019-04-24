@@ -156,6 +156,8 @@ class CustomerList extends Component {
       <div>
         {this.state.isCustomerList && (
           <div>
+            <h1>Customer Database</h1>
+            <br />
             <AddCustomer addCustomer={this.addCustomer} />
             <br />
             <ReactTable
