@@ -57,6 +57,9 @@ const Header = props => {
                   <Link to="/" style={style}>
                     Home
                   </Link>
+                  <Link to="/database" style={style}>
+                    Database
+                  </Link>
                   <Link to="/calendar" style={style}>
                     Calendar
                   </Link>

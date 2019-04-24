@@ -8,6 +8,7 @@ import Header from "./Header";
 import LogIn from "./components/login/LogInPage";
 import "./index.css";
 import * as firebaseui from "firebaseui";
+import HomePage from "./HomePage";
 
 const history = createBrowserHistory();
 
@@ -17,6 +18,15 @@ ReactDOM.render(
       <Route
         exact={true}
         path="/"
+        render={() => (
+          <Header>
+            <HomePage />
+          </Header>
+        )}
+      />
+      <Route
+        exact={true}
+        path="/database"
         render={() => (
           <Header>
             <App />
