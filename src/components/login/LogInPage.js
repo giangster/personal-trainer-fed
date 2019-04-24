@@ -1,63 +1,132 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import { firebaseAuth } from "../../config";
+import { ToastContainer, toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
-export default class LogIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openLogInPage: true,
-      openSignIn: false,
-      openSignUp: false
-    };
-  }
+export default class Login extends Component {
+  state = { email: "", password: "", redirect: false };
 
-  openLogInPage = () => {
-    this.setState({
-      openLogInPage: true,
-      openSignIn: false,
-      openSignUp: false
-    });
+  resetPassword = event => {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    firebaseAuth()
+      .sendPasswordResetEmail(email)
+      .then(function() {
+        toast.success("Password reset email sent.", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      })
+      .catch(function(error) {
+        toast.error(
+          "Error in resetting password. Type your email to email field.",
+          {
+            position: toast.POSITION.TOP_RIGHT
+          }
+        );
+      });
   };
 
-  openSignIn = () => {
-    this.setState({
-      openLogInPage: false,
-      openSignIn: true,
-      openSignUp: false
-    });
+  onLoginClick = event => {
+    event.preventDefault();
+
+    const { email, password } = this.state;
+    firebaseAuth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // Redirect
+        this.setState({ redirect: true });
+      })
+      .catch(() => {
+        // No account found. Create a new one and send verification email
+        firebaseAuth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            var user = firebaseAuth().currentUser;
+            user
+              .sendEmailVerification()
+              .then(function() {
+                toast.success("Verifiaction email sent.", {
+                  position: toast.POSITION.TOP_RIGHT
+                });
+              })
+              .catch(function(error) {
+                toast.error("Error in authentication.", {
+                  position: toast.POSITION.TOP_RIGHT
+                });
+              });
+          })
+          .catch(() => {
+            toast.error("Could not login. Check your email and password.", {
+              position: toast.POSITION.TOP_RIGHT
+            });
+          });
+      });
   };
 
-  openSignUp = () => {
-    this.setState({
-      openLogInPage: false,
-      openSignIn: false,
-      openSignUp: true
-    });
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
+
     return (
-      <div>
-        {this.state.openLogInPage && (
-          <div>
-            <h1 style={{ margin: 50, display: "center" }}>
-              Create your own training schedule <br />
-              and see how well you perform!
-            </h1>
-            <p>Log in to check your training schedule</p>
-            <Button onClick={this.openSignIn} variant="outlined">
-              Log in
-            </Button>
-            <p>Don't have an account yet? Sign up here!</p>
-            <Button onClick={this.openSignUp} variant="outlined">
-              Sign up
-            </Button>
+      <div className="container py-5">
+        <div className="row">
+          <div className="col-md-12">
+            <h2 className="text-center text-white mb-4">Login Form</h2>
+            <div className="row">
+              <div className="col-md-6 mx-auto">
+                <span className="anchor" id="formLogin" />
+                <div className="card rounded-0">
+                  <div className="card-header">
+                    <h3 className="mb-0">Login</h3>
+                  </div>
+                  <div className="card-body">
+                    <form className="form" role="form" id="formLogin">
+                      <div className="form-group">
+                        <label>Email</label>
+                        <input
+                          type="text"
+                          id="email"
+                          className="form-control form-control-lg rounded-0"
+                          name="email"
+                          onChange={this.handleChange}
+                          placeholder="email@domain.com"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <input
+                          type="password"
+                          className="form-control form-control-lg rounded-0"
+                          name="password"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <button
+                        onClick={this.resetPassword}
+                        className="btn btn-link float-left"
+                      >
+                        Forgot password?
+                      </button>
+                      <button
+                        onClick={this.onLoginClick}
+                        className="btn btn-success btn-lg float-right"
+                      >
+                        Login
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        )}
-        {this.state.openSignIn && <SignIn openLogInPage={this.openLogInPage} />}
-        {this.state.openSignUp && <SignUp openLogInPage={this.openLogInPage} />}
+        </div>
+        <ToastContainer />
       </div>
     );
   }
