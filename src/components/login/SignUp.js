@@ -17,7 +17,7 @@ export default class SignUp extends Component {
           variant="outlined"
           onClick={this.props.openLogInPage}
         >
-          &laquo; Back
+          &laquo; Backkk
         </Button>
       </div>
     );

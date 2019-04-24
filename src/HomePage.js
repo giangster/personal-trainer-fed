@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import personaltrainer from "../src/assets/personaltrainer.png";
-import Button from "@material-ui/core/Button";
 
 var homePageStyle = {
   width: "100%",
@@ -14,7 +13,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <div style={homePageStyle}>
-        <h1 style={{ marginBottom: 20, fontStyle: "bolder", fontSize: 50 }}>
+        <h1 style={{ marginBottom: 20, fontWeight: "bolder", fontSize: 50 }}>
           Welcome to Personal Trainer Company
         </h1>
         <br />
@@ -24,10 +23,6 @@ export default class HomePage extends Component {
         </h2>
         <br />
         <br />
-        <h3>Check customer database</h3>
-        <Button color="default" variant="outlined">
-          Click here &raquo;
-        </Button>
       </div>
     );
   }
