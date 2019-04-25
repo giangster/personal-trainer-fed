@@ -64,7 +64,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               path="/database"
               render={() => (
-                <Header>
+                <Header isAuthenticated={this.state.isAuthenticated}>
                   <CustomerList />
                 </Header>
               )}
@@ -73,7 +73,7 @@ class App extends Component {
               isAuthenticated={this.state.isAuthenticated}
               path="/calendar"
               render={() => (
-                <Header>
+                <Header isAuthenticated={this.state.isAuthenticated}>
                   <Calendar />
                 </Header>
               )}
@@ -81,7 +81,7 @@ class App extends Component {
             <Route
               path="/login"
               render={() => (
-                <Header>
+                <Header isAuthenticated={this.state.isAuthenticated}>
                   <LogIn />
                 </Header>
               )}

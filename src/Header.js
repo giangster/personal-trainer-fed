@@ -6,7 +6,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import CustomerList from "./components/home/CustomerList";
-import { firebaseAuth } from "./config";
 
 function HomeIcon(props) {
   return (
@@ -16,19 +15,33 @@ function HomeIcon(props) {
   );
 }
 
-function logout() {
-  return firebaseAuth().signOut();
-}
+const style = {
+  display: "inline-block",
+  margin: 10,
+  textDecorationLine: "none",
+  fontFamily: "RobotoCondensed",
+  fontSize: 25,
+  color: "white"
+};
 
 const Header = props => {
-  const style = {
-    display: "inline-block",
-    margin: 10,
-    textDecorationLine: "none",
-    fontFamily: "RobotoCondensed",
-    fontSize: 25,
-    color: "white"
-  };
+  let logLink = null;
+  if (props.isAuthenticated)
+    logLink = (
+      <div style={{ float: "right" }}>
+        <Link style={style} to="/logout">
+          Logout
+        </Link>
+      </div>
+    );
+  else
+    logLink = (
+      <div style={{ float: "right" }}>
+        <Link style={style} to="/login">
+          Login
+        </Link>
+      </div>
+    );
 
   return (
     <div>
@@ -70,11 +83,8 @@ const Header = props => {
                   </Link>
                 </div>
               </div>
-              <div style={{ float: "right" }}>
-                <Link to="/login" style={style}>
-                  Log In
-                </Link>
-              </div>
+
+              {logLink}
             </Typography>
           </Toolbar>
         </AppBar>

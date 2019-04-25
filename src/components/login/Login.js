@@ -83,6 +83,10 @@ export default class LogIn extends Component {
     this.setState({ [prop]: event.target.value });
   };
 
+  handleChanges = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     if (this.state.redirect) {
       return <Redirect to="/" />;
@@ -97,7 +101,7 @@ export default class LogIn extends Component {
                 style={{ width: 250, height: 60 }}
                 id="email"
                 label="Email"
-                onChange={this.handleChange}
+                onChange={this.handleChanges}
                 type="email"
                 name="email"
                 autoComplete="email"
