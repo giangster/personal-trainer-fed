@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import CustomerList from "./components/home/CustomerList";
+import { firebaseAuth } from "./config";
 
 function HomeIcon(props) {
   return (
@@ -13,6 +14,10 @@ function HomeIcon(props) {
       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
     </SvgIcon>
   );
+}
+
+function logout() {
+  return firebaseAuth().signOut();
 }
 
 const Header = props => {
