@@ -61,7 +61,7 @@ export default class LogIn extends Component {
             user
               .sendEmailVerification()
               .then(function() {
-                toast.success("Verifiaction email sent.", {
+                toast.success("Verification email sent.", {
                   position: toast.POSITION.TOP_RIGHT
                 });
               })
