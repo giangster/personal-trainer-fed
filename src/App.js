@@ -54,7 +54,7 @@ class App extends Component {
             <Route
               exact={true}
               path="/"
-              render={() => (
+              component={() => (
                 <Header>
                   <HomePage />
                 </Header>
@@ -63,7 +63,7 @@ class App extends Component {
             <PrivateRoute
               isAuthenticated={this.state.isAuthenticated}
               path="/database"
-              render={() => (
+              component={() => (
                 <Header isAuthenticated={this.state.isAuthenticated}>
                   <CustomerList />
                 </Header>
@@ -72,7 +72,7 @@ class App extends Component {
             <PrivateRoute
               isAuthenticated={this.state.isAuthenticated}
               path="/calendar"
-              render={() => (
+              component={() => (
                 <Header isAuthenticated={this.state.isAuthenticated}>
                   <Calendar />
                 </Header>
@@ -80,13 +80,13 @@ class App extends Component {
             />
             <Route
               path="/login"
-              render={() => (
-                <Header isAuthenticated={this.state.isAuthenticated}>
+              component={() => (
+                <Header>
                   <LogIn />
                 </Header>
               )}
             />
-            <Route render={() => <h1>Page not found</h1>} />
+            <Route render={() => <h2>Logout successfully!</h2>} />
           </Switch>
         </Router>
       </div>
